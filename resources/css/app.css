@@ -1,0 +1,53 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-poppins: 'Poppins', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --color-brand-primary: #6366F1;
+    --color-brand-accent: #06B6D4;
+    --color-brand-secondary: #8B5CF6;
+}
+
+@layer base {
+    body {
+        @apply font-inter antialiased selection:bg-brand-primary selection:text-white;
+        scroll-behavior: smooth;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-poppins font-bold;
+    }
+    
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        @apply bg-gray-100 dark:bg-[#0f172a];
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        @apply bg-brand-primary/50 rounded-full hover:bg-brand-primary;
+    }
+}
+
+@layer utilities {
+    .glass-card {
+        @apply bg-[#0f172a]/50 backdrop-blur-md border border-white/10 rounded-2xl;
+    }
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent;
+    }
+    .hover-lift {
+        @apply transition-transform duration-300 hover:-translate-y-2;
+    }
+}
