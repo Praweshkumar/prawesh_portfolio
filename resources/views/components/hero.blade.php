@@ -1,3 +1,16 @@
+@php
+    $hero_title = \App\Models\Setting::where('key', 'hero_title_text')->value('value') ?? 'I am <br class="md:hidden">
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] via-[#8B5CF6] to-[#EC4899]">Prawesh</span>,<br>
+a Full Stack Developer.';
+    $hero_desc = \App\Models\Setting::where('key', 'hero_description_text')->value('value') ?? 'I build exceptional and accessible digital experiences for the web. Transforming complex problems into elegant, modern, and scalable solutions.';
+    $hero_cv = \App\Models\Setting::where('key', 'hero_cv_link')->value('value') ?? '#';
+    $hero_github = \App\Models\Setting::where('key', 'hero_github_link')->value('value') ?? '#';
+    $hero_linkedin = \App\Models\Setting::where('key', 'hero_linkedin_link')->value('value') ?? '#';
+    
+    $hero_img = \App\Models\Setting::where('key', 'hero_image')->value('value');
+    $hero_img_url = $hero_img ? asset('storage/' . $hero_img) : asset('images/profile-new.jpg');
+@endphp
+
 <section id="home" class="relative min-h-screen flex flex-col justify-center pt-20 pb-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -19,24 +32,26 @@
                     <div class="absolute top-0 right-10 w-72 h-72 bg-purple-500/20 rounded-full blur-[100px] pointer-events-none"></div>
 
                     <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-gray-900 dark:text-white drop-shadow-md relative z-10">
-                        I am <br class="md:hidden">
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] via-[#8B5CF6] to-[#EC4899]">Prawesh</span>,<br>
-                        a Full Stack Developer.
+                        {!! $hero_title !!}
                     </h1>
                     
                     <p class="text-gray-600 dark:text-[#E2E8F0] text-lg max-w-xl leading-[1.8] font-medium mt-8 relative z-10">
-                        I build exceptional and accessible digital experiences for the web. Transforming complex problems into elegant, modern, and scalable solutions.
+                        {{ $hero_desc }}
                     </p>
                     
                     <div class="pt-10 relative z-10">
-                        <a href="https://drive.google.com/file/d/1Ig-0ADk-4MdxbcOvTikTIb7H5DL5ANjy/view?usp=drivesdk" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300">
+                        <a href="{{ $hero_cv }}" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300">
                             Download My CV <i class="fa-solid fa-download"></i>
                         </a>
                     </div>
                     
                     <div class="flex gap-6 pt-10">
-                        <a href="https://github.com/Praweshkumar" class="text-gray-400 dark:text-[#94A3B8] hover:text-gray-900 dark:hover:text-white transition-colors"><i class="fa-brands fa-github text-3xl"></i></a>
-                        <a href="https://www.linkedin.com/in/prawesh-kumar-838674226/" class="text-gray-400 dark:text-[#94A3B8] hover:text-[#3B82F6] dark:hover:text-[#3B82F6] transition-colors"><i class="fa-brands fa-linkedin text-3xl"></i></a>
+                        @if($hero_github)
+                        <a href="{{ $hero_github }}" class="text-gray-400 dark:text-[#94A3B8] hover:text-gray-900 dark:hover:text-white transition-colors"><i class="fa-brands fa-github text-3xl"></i></a>
+                        @endif
+                        @if($hero_linkedin)
+                        <a href="{{ $hero_linkedin }}" class="text-gray-400 dark:text-[#94A3B8] hover:text-[#3B82F6] dark:hover:text-[#3B82F6] transition-colors"><i class="fa-brands fa-linkedin text-3xl"></i></a>
+                        @endif
                         <!-- <a href="#" class="text-gray-400 dark:text-[#94A3B8] hover:text-[#EC4899] dark:hover:text-[#EC4899] transition-colors"><i class="fa-brands fa-twitter text-3xl"></i></a> -->
                     </div>
                 </div>
@@ -51,7 +66,7 @@
                      
                     <!-- Large Profile Image Box -->
                     <div class="w-full aspect-square bg-brand-primary rounded-[2.5rem] flex items-center justify-center relative shadow-2xl overflow-hidden">
-                        <img src="{{ asset('images/profile-new.jpg') }}" alt="Prawesh" class="w-full h-full object-cover">
+                        <img src="{{ $hero_img_url }}" alt="Prawesh" class="w-full h-full object-cover">
                         
                         <!-- Floating Tech Badges -->
                         <div class="absolute -left-6 top-16 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-white/40 dark:border-gray-700/40 px-4 py-2 rounded-xl flex items-center gap-2 shadow-lg">

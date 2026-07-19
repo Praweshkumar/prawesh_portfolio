@@ -12,6 +12,12 @@
             </h3>
         </div>
 
+@php
+    $email = \App\Models\Setting::where('key', 'contact_email')->value('value') ?? 'parweshk394@gmail.com';
+    $phone = \App\Models\Setting::where('key', 'contact_phone')->value('value') ?? '078389 00306';
+    $location = \App\Models\Setting::where('key', 'contact_location')->value('value') ?? 'Haryana, Haryana';
+@endphp
+
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             
             <!-- Contact Info -->
@@ -33,7 +39,7 @@
                             </div>
                             <div>
                                 <h5 class="text-gray-900 dark:text-white font-bold mb-1">Email</h5>
-                                <a href="mailto:parweshk394@gmail.com" class="text-gray-500 dark:text-[#94A3B8] hover:text-gray-900 dark:hover:text-white transition-colors">parweshk394@gmail.com</a>
+                                <a href="mailto:{{ $email }}" class="text-gray-500 dark:text-[#94A3B8] hover:text-gray-900 dark:hover:text-white transition-colors">{{ $email }}</a>
                             </div>
                         </div>
                         
@@ -43,7 +49,7 @@
                             </div>
                             <div>
                                 <h5 class="text-gray-900 dark:text-white font-bold mb-1">Phone</h5>
-                                <a href="tel:07838900306" class="text-gray-500 dark:text-[#94A3B8] hover:text-gray-900 dark:hover:text-white transition-colors">078389 00306</a>
+                                <a href="tel:{{ preg_replace('/[^0-9]/', '', $phone) }}" class="text-gray-500 dark:text-[#94A3B8] hover:text-gray-900 dark:hover:text-white transition-colors">{{ $phone }}</a>
                             </div>
                         </div>
                         
@@ -53,7 +59,7 @@
                             </div>
                             <div>
                                 <h5 class="text-gray-900 dark:text-white font-bold mb-1">Location</h5>
-                                <p class="text-gray-500 dark:text-[#94A3B8]">Haryana, Haryana</p>
+                                <p class="text-gray-500 dark:text-[#94A3B8]">{{ $location }}</p>
                             </div>
                         </div>
                     </div>

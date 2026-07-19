@@ -1,3 +1,16 @@
+@php
+    $about_img = \App\Models\Setting::where('key', 'about_image')->value('value');
+    $about_img_url = $about_img ? asset('storage/' . $about_img) : asset('images/prawesh_aboutt.png');
+    
+    $about_text_main = \App\Models\Setting::where('key', 'about_text_main')->value('value') ?? '<p>Hello! I\'m <strong>Prawesh Kumar</strong>, a passionate Full Stack Developer with experience in building modern web and mobile applications. I specialize in PHP, Laravel, React.js, Next.js, React Native, Node.js, MySQL, and MongoDB, creating scalable and user-friendly digital solutions.</p>
+<p>I completed my Bachelor\'s degree in <strong>Bachelor of Computer Applications (BCA)</strong> from <strong>Maharshi Dayanand University</strong>. During my academic journey and professional experience, I developed strong problem-solving skills and gained hands-on experience in developing responsive websites, REST APIs, admin dashboards, and cross-platform mobile applications.</p>
+<p>Currently, I focus on writing clean, maintainable code and continuously learning new technologies to build high-performance applications that deliver real business value.</p>';
+    
+    $about_degree_title = \App\Models\Setting::where('key', 'about_degree_title')->value('value') ?? 'Bachelor of Computer Applications (BCA)';
+    $about_university = \App\Models\Setting::where('key', 'about_university')->value('value') ?? 'Maharshi Dayanand University';
+    $about_quote = \App\Models\Setting::where('key', 'about_quote_text')->value('value') ?? 'Passionate about building scalable web and mobile applications with modern technologies and delivering clean, efficient, and user-focused solutions.';
+@endphp
+
 <section id="about" class="py-24 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -18,7 +31,7 @@
                      x-transition:enter-end="opacity-100 translate-x-0"
                      class="relative rounded-3xl overflow-hidden shadow-sm">
                     
-                    <img src="{{ asset('images/prawesh_aboutt.png') }}" alt="Prawesh Profile" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-700">
+                    <img src="{{ $about_img_url }}" alt="Prawesh Profile" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-700">
                 
                 </div>
             </div>
@@ -31,32 +44,22 @@
                      class="pt-8">
                      
                     <div class="space-y-6 text-gray-600 dark:text-[#E2E8F0] text-lg leading-[1.8] font-medium mb-12">
-                        <p>
-                            Hello! I'm <strong>Prawesh Kumar</strong>, a passionate Full Stack Developer with experience in building modern web and mobile applications. I specialize in PHP, Laravel, React.js, Next.js, React Native, Node.js, MySQL, and MongoDB, creating scalable and user-friendly digital solutions.
-                        </p>
-                    
-                        <p>
-                            I completed my Bachelor's degree in <strong>Bachelor of Computer Applications (BCA)</strong> from <strong>Your University Name</strong>. During my academic journey and professional experience, I developed strong problem-solving skills and gained hands-on experience in developing responsive websites, REST APIs, admin dashboards, and cross-platform mobile applications.
-                        </p>
-                    
-                        <p>
-                            Currently, I focus on writing clean, maintainable code and continuously learning new technologies to build high-performance applications that deliver real business value.
-                        </p>
+                        {!! $about_text_main !!}
                     </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div class="border-l border-gray-300 dark:border-white/20 pl-6">
                             <p class="text-gray-900 dark:text-white text-sm font-semibold mb-1">
-                                Bachelor of Computer Applications (BCA)
+                                {{ $about_degree_title }}
                             </p>
                             <p class="text-gray-500 dark:text-[#94A3B8] text-sm">
-                                Maharshi Dayanand University
+                                {{ $about_university }}
                             </p>
                         </div>
                     
                         <div class="border-l border-gray-300 dark:border-white/20 pl-6">
                             <p class="text-gray-500 dark:text-[#94A3B8] text-sm leading-relaxed">
-                                Passionate about building scalable web and mobile applications with modern technologies and delivering clean, efficient, and user-focused solutions.
+                                {{ $about_quote }}
                             </p>
                         </div>
                     </div>

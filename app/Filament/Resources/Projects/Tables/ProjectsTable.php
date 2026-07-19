@@ -18,7 +18,7 @@ class ProjectsTable
             ->columns([
                 ImageColumn::make('image_path')->label('Image')->square(),
                 TextColumn::make('title')->searchable()->sortable(),
-                TextColumn::make('demo_link')->url(),
+                TextColumn::make('demo_link')->url(fn ($record) => $record->demo_link),
             ])
             ->filters([
                 //
