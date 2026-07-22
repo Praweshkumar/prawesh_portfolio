@@ -24,7 +24,7 @@ a Full Stack Developer.';
                      class="space-y-6">
                      
                     <div class="inline-flex items-center px-4 py-2 rounded-full border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-[#0f172a]/50 backdrop-blur-md text-gray-500 dark:text-[#94A3B8] font-medium text-sm mb-6 shadow-sm">
-                        <span class="mr-2">👋</span> Welcome to my portfolio
+                        <span class="mr-2">📂</span> Explore My Developer Journey
                     </div>
                     
                     <!-- Soft Radial Glow Behind Heading -->
@@ -32,7 +32,40 @@ a Full Stack Developer.';
                     <div class="absolute top-0 right-10 w-72 h-72 bg-purple-500/20 rounded-full blur-[100px] pointer-events-none"></div>
 
                     <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-gray-900 dark:text-white drop-shadow-md relative z-10">
-                        {!! $hero_title !!}
+                        I am <br class="md:hidden">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] via-[#8B5CF6] to-[#EC4899]">Prawesh</span>,<br>
+                        a <span x-data="{
+                            text: '',
+                            texts: ['Full Stack Developer.', 'Software Developer.', 'Php Laravel Developer.', 'UI/UX Enthusiast.'],
+                            textIndex: 0,
+                            charIndex: 0,
+                            isDeleting: false,
+                            typeSpeed: 100,
+                            type() {
+                                const currentText = this.texts[this.textIndex];
+                                if (this.isDeleting) {
+                                    this.text = currentText.substring(0, this.charIndex - 1);
+                                    this.charIndex--;
+                                    this.typeSpeed = 40; // deleting speed
+                                } else {
+                                    this.text = currentText.substring(0, this.charIndex + 1);
+                                    this.charIndex++;
+                                    this.typeSpeed = 120; // typing speed
+                                }
+
+                                if (!this.isDeleting && this.charIndex === currentText.length) {
+                                    this.isDeleting = true;
+                                    this.typeSpeed = 2000; // pause at the end of word
+                                } else if (this.isDeleting && this.charIndex === 0) {
+                                    this.isDeleting = false;
+                                    this.textIndex = (this.textIndex + 1) % this.texts.length;
+                                    this.typeSpeed = 500; // pause before typing next
+                                }
+                                setTimeout(() => this.type(), this.typeSpeed);
+                            }
+                        }" x-init="type()">
+                            <span x-text="text"></span><span class="animate-[pulse_1s_ease-in-out_infinite] border-r-4 border-[#3B82F6] ml-1"></span>
+                        </span>
                     </h1>
                     
                     <p class="text-gray-600 dark:text-[#E2E8F0] text-lg max-w-xl leading-[1.8] font-medium mt-8 relative z-10">
@@ -64,16 +97,31 @@ a Full Stack Developer.';
                      x-transition:enter-end="opacity-100 scale-100 translate-x-0"
                      class="relative w-full max-w-md">
                      
-                    <!-- Large Profile Image Box -->
-                    <div class="w-full aspect-square bg-brand-primary rounded-[2.5rem] flex items-center justify-center relative shadow-2xl overflow-hidden">
-                        <img src="{{ $hero_img_url }}" alt="Prawesh" class="w-full h-full object-cover">
+                    <!-- Premium Liquid Profile Image -->
+                    <style>
+                        @keyframes morph {
+                            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+                            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+                            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+                        }
+                        .animate-morph {
+                            animation: morph 8s ease-in-out infinite;
+                        }
+                    </style>
+                    <div class="relative w-full aspect-square group flex items-center justify-center cursor-pointer">
+                        <!-- Vibrant Glow Behind -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-[#3B82F6] to-[#EC4899] blur-[50px] opacity-40 group-hover:opacity-70 group-hover:scale-110 transition-all duration-700 animate-pulse pointer-events-none"></div>
                         
-                        <!-- Floating Tech Badges -->
-                        <div class="absolute -left-6 top-16 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-white/40 dark:border-gray-700/40 px-4 py-2 rounded-xl flex items-center gap-2 shadow-lg">
-                            <i class="fa-brands fa-laravel text-red-500"></i> <span class="text-sm font-medium text-gray-800 dark:text-gray-200">Laravel</span>
-                        </div>
-                        <div class="absolute -right-6 bottom-24 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-white/40 dark:border-gray-700/40 px-4 py-2 rounded-xl flex items-center gap-2 shadow-lg">
-                            <i class="fa-brands fa-js text-yellow-500"></i> <span class="text-sm font-medium text-gray-800 dark:text-gray-200">JavaScript</span>
+                        <!-- Rotating Liquid Gradient Border -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#3B82F6] via-[#8B5CF6] to-[#EC4899] animate-[spin_6s_linear_infinite] animate-morph opacity-80 group-hover:opacity-100 transition-opacity duration-500 scale-[1.03]"></div>
+
+                        <!-- Inner Image Container -->
+                        <div class="absolute inset-[5px] bg-white dark:bg-[#0f172a] animate-morph overflow-hidden z-10 transition-transform duration-500 group-hover:scale-[1.02]">
+                            <!-- Image with Grayscale-to-Color Effect -->
+                            <img src="{{ $hero_img_url }}" alt="Prawesh" class="w-full h-full object-cover contrast-125 grayscale-[60%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
+                            
+                            <!-- Sweeping Glass Shimmer Overlay -->
+                            <div class="absolute top-0 -left-[150%] h-full w-[100%] z-20 transform -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:left-[200%] transition-all duration-[1500ms] ease-in-out pointer-events-none"></div>
                         </div>
                     </div>
                 </div>
