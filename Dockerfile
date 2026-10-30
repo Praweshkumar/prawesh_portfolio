@@ -11,6 +11,7 @@ FROM php:8.2-apache
 
 # Install required system packages and PHP extensions for Laravel & Filament
 RUN apt-get update && apt-get install -y \
+    ca-certificates \
     git \
     curl \
     libpng-dev \
