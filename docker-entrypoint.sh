@@ -7,19 +7,23 @@ if [ -n "$PORT" ]; then
     sed -i "s/:80/:$PORT/g" /etc/apache2/sites-available/000-default.conf
 fi
 
-# Create storage symlink
+# Storage link
 php artisan storage:link || true
 
-# Cache configurations
+# Clear previous caches
+php artisan config:clear || true
+php artisan route:clear || true
+php artisan view:clear || true
+
+# Run database migrations and seeds
+echo "==> Running database migrations on TiDB..."
+php artisan migrate --force || true
+php artisan db:seed --force || true
+
+# Cache configurations for speed
 php artisan config:cache || true
 php artisan route:cache || true
 php artisan view:cache || true
 
-# Run database migrations
-php artisan migrate --force || true
-
-# Run filament optimization
-php artisan filament:optimize || true
-
-# Start Apache in foreground
+echo "==> Application ready, starting Apache..."
 exec apache2-foreground
